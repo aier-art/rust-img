@@ -14,11 +14,14 @@ source $DIR/sh/cflag.sh
 # fi
 
 # cd jpegxl-rs/jpegxl-src/libjxl
-git clone --depth=1 https://github.com/libjxl/libjxl.git
+if [ ! -d "libjxl" ]; then
+  git clone --depth=1 https://github.com/libjxl/libjxl.git
+fi
 cd libjxl
+git pull
 git submodule update --init --recursive
 
-./deps.sh && cmake . -DBUILD_TESTING=OFF && make -j $(nproc) && make install
+./deps.sh && cmake . -DJPEGXL_ENABLE_BENCHMARK=false -DBUILD_TESTING=OFF && make -j $(nproc) && make install
 rm CMakeCache.txt
 
 cd $DIR

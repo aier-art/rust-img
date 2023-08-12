@@ -5,7 +5,7 @@ cd $DIR
 set -ex
 
 direnv allow
-./sh/jpegxl-rs.sh
+./sh/libjxl.sh
 ./dist.native.sh
 ./install.img.service.sh
 rm -rf jpegxl-rs
