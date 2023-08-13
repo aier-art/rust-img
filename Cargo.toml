@@ -13,15 +13,14 @@ futures = "0.3.28"
 human_bytes = "0.4.2"
 quinn = { version = "0.10", default-features = false, features = [
   "runtime-tokio",
-  "tls-rustls",
-  "ring"
+    "tls-rustls",
+    "ring"
 ] }
 image = { version = "0.24.7", features = [
   "avif-encoder",
-  "avif",
-  "libwebp",
-  "webp",
-  "webp-encoder"
+    "libwebp",
+    "webp",
+    "webp-encoder"
 ] }
 #jpegxl-rs = { path="./jpegxl-rs/jpegxl-rs" }
 #jpegxl-sys = { path="./jpegxl-rs/jpegxl-sys" }
