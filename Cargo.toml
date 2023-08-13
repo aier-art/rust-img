@@ -13,14 +13,14 @@ futures = "0.3.28"
 human_bytes = "0.4.2"
 quinn = { version = "0.10", default-features = false, features = [
   "runtime-tokio",
-    "tls-rustls",
-    "ring"
+  "tls-rustls",
+  "ring"
 ] }
 image = { version = "0.24.7", features = [
   "avif-encoder",
-    "libwebp",
-    "webp",
-    "webp-encoder"
+  "libwebp",
+  "webp",
+  "webp-encoder"
 ] }
 #jpegxl-rs = { path="./jpegxl-rs/jpegxl-rs" }
 #jpegxl-sys = { path="./jpegxl-rs/jpegxl-sys" }
@@ -53,8 +53,8 @@ features = ["macros", "rt-multi-thread"]
 lto = true
 opt-level = 3
 incremental = true
+codegen-units = 1
 
-# codegen-units = 1
 # overflow-checks = false
 # panic = 'abort'
 # strip = true
