@@ -14,7 +14,12 @@ fi
 
 name=$(grep "^name" Cargo.toml | sed 's/name = //g' | awk -F\" '{print $2}')
 
-cp ./service /etc/systemd/system/$name.service
+system_service=/etc/systemd/system/$name.service
+cp ./service $system_service
+
+if [ -n "$TO" ]; then
+  sed -i 's#Environment="TO=.*"#Environment="TO='"$TO"'"#' $system_service
+fi
 
 systemctl daemon-reload
 
