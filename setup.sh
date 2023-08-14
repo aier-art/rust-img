@@ -7,5 +7,4 @@ set -ex
 direnv allow
 ./sh/libjxl.sh
 ./dist.native.sh
-./service.sh
 rm -rf jpegxl-rs

@@ -25,7 +25,7 @@ if [[ $(uname -s) == Linux ]]; then
   fi
 
   mv target/$RUST_TARGET/release/$name /mnt/bin
-  systemctl restart $name || ./install.img.service.sh
+  systemctl restart $name || ./service.sh
   sleep 5
 
   if ! systemctl is-active --quiet img.service; then
