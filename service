@@ -5,6 +5,8 @@ After=network.target
 [Service]
 Type=simple
 Restart=on-failure
+CPUSchedulingPolicy=rr
+CPUSchedulingPriority=70
 RestartSec=1
 Environment="RUST_LOG=debug,supervisor=warn,hyper=warn,rustls=warn,quinn_udp=warn"
 Environment="LD_LIBRARY_PATH=/usr/local/lib"
