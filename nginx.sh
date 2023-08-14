@@ -15,4 +15,13 @@ for file in $DIR/nginx/*.conf; do
   ln -s "$file" "/etc/nginx/site/$filename"
 done
 
+if [ -n "$HOST_LI" ]; then
+  SERVERS=""
+  for host in $HOST_LI; do
+    SERVERS="${SERVERS}server $host:5500;\n"
+  done
+
+  sed -i "s|server 127.0.0.1:5500;|${SERVERS}|g" /etc/nginx/site/img-b2.conf
+fi
+
 nginx -t && nginx -s reload
