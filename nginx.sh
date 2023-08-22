@@ -24,4 +24,6 @@ if [ -n "$HOST_LI" ]; then
   sed -i "s|server 127.0.0.1:5500;|${SERVERS}|g" /etc/nginx/site/img-b2.conf
 fi
 
+cd /etc/nginx/site
+ln -s $DIR/nginx/jpg.5ok.pw.conf .
 nginx -t && nginx -s reload
