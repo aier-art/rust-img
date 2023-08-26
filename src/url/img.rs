@@ -5,8 +5,16 @@ use axum::{
   extract::Path,
   response::{IntoResponse, Response},
 };
+use lazy_static::lazy_static;
 
 use crate::{img, img::Ext};
+
+lazy_static! {
+  static ref CLIENT: reqwest::Client = reqwest::ClientBuilder::new()
+    .danger_accept_invalid_certs(true)
+    .build()
+    .unwrap();
+}
 
 const CONTENT_TYPE: &str = "content-type";
 
@@ -32,7 +40,7 @@ pub async fn proxy(id: &str, to_width: u32, to_height: u32) -> Result<Response> 
   }
 
   let url = unsafe { crate::env::TO.clone() + &hash };
-  let req = reqwest::get(&url).await?;
+  let req = CLIENT.get(&url).send().await?;
 
   let status = req.status();
   let mime = req
