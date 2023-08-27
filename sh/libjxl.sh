@@ -6,7 +6,9 @@ set -ex
 os_type=$(uname)
 
 source $DIR/sh/cflag.sh
-
+if ! [ -x "$(command -v g++)" ]; then
+  apt-get install -y g++
+fi
 # VER=0.8.2
 #
 # if [ ! -d "jpegxl-rs" ]; then
