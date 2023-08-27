@@ -14,6 +14,7 @@ if ! [ -x "$(command -v cargo)" ]; then
     source $cargo_env
   else
     curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path --default-toolchain nightly
+    source $cargo_env
   fi
 fi
 
