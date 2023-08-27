@@ -6,6 +6,6 @@ set -ex
 
 cargo build
 
-TO=https://user0.gq/ \
+TO=https://xxai.eu.org/ \
   RUST_BACKTRACE=short \
   exec ${1:-./target/debug/img}
