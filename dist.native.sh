@@ -8,6 +8,15 @@ export NATIVE=1
 
 # ./sh/jpegxl-rs.sh
 
+if ! [ -x "$(command -v cargo)" ]; then
+  cargo_env=$HOME/.cargo/env
+  if [ -f "$cargo_env" ]; then
+    source $cargo_env
+  else
+    curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path --default-toolchain nightly
+  fi
+fi
+
 source ./sh/cflag.sh
 
 cargo build $RUST_FEATURES --release --target $RUST_TARGET
