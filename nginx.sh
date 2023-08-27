@@ -25,5 +25,6 @@ if [ -n "$HOST_LI" ]; then
 fi
 
 cd /etc/nginx/site
+rm -rf jpg.5ok.pw.conf
 ln -s $DIR/nginx/jpg.5ok.pw.conf .
 nginx -t && nginx -s reload
