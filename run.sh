@@ -6,6 +6,6 @@ set -ex
 
 cargo build
 
-TO="https://f004.backblazeb2.com/file/xxai-jxl/" \
+TO=https://xxai.eu.org/ \
   RUST_BACKTRACE=short \
   exec ${1:-./target/debug/img}

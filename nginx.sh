@@ -18,10 +18,13 @@ done
 if [ -n "$HOST_LI" ]; then
   SERVERS=""
   for host in $HOST_LI; do
-    SERVERS="${SERVERS}server $host:5500;\n"
+    SERVERS="${SERVERS}server $host:5500 max_fails=3 fail_timeout=6s;\n"
   done
 
   sed -i "s|server 127.0.0.1:5500;|${SERVERS}|g" /etc/nginx/site/img-b2.conf
 fi
 
+cd /etc/nginx/site
+rm -rf jpg.5ok.pw.conf
+ln -s $DIR/nginx/jpg.5ok.pw.conf .
 nginx -t && nginx -s reload

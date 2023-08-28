@@ -8,10 +8,10 @@ Restart=on-failure
 CPUSchedulingPolicy=rr
 CPUSchedulingPriority=70
 RestartSec=1
-Environment="RUST_LOG=debug,supervisor=warn,hyper=warn,rustls=warn,quinn_udp=warn"
+Environment="RUST_LOG=debug,supervisor=warn,hyper=warn,rustls=warn,quinn_udp=warn,h2=warn"
 Environment="LD_LIBRARY_PATH=/usr/local/lib"
 Environment="PORT=5500"
-Environment="TO=http://127.0.0.1:5400/"
+Environment="TO=https://xxai.eu.org/"
 ExecStart=timeout 7d /mnt/bin/img
 
 [Install]
