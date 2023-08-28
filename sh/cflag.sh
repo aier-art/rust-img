@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [ -z "${HOME}" ]; then
+  export HOME=/root
+fi
+
 if ! [ -x "$(command -v cargo)" ]; then
   cargo_env="$HOME/.cargo/env"
   if [ -f "$cargo_env" ]; then
