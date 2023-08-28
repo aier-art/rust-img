@@ -6,6 +6,10 @@ set -ex
 
 export NATIVE=1
 
+if [ -z "${HOME}" ]; then
+  export HOME=/root
+fi
+
 # ./sh/jpegxl-rs.sh
 if ! [ -x "$(command -v cargo)" ]; then
   cargo_env=$HOME/.cargo/env
