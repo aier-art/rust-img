@@ -52,7 +52,7 @@ features = ["macros", "rt-multi-thread"]
 
 [profile.release]
 lto = true
-opt-level = 3
+opt-level = 2
 incremental = true
 codegen-units = 1
 
