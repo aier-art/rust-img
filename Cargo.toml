@@ -34,7 +34,7 @@ tracing = "0.1.37"
 tracing-stackdriver = { version = "0.7.2", optional = true }
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 jpegxl-rs = "0.8.2"
-awp = "0.1.4"
+awp = "0.1.8"
 lazy_static = "1.4.0"
 
 # tower-http = { version = "0.4.0", features = ["trace"] }
@@ -52,7 +52,7 @@ features = ["macros", "rt-multi-thread"]
 
 [profile.release]
 lto = true
-opt-level = 2
+opt-level = 3
 incremental = true
 codegen-units = 1
 
