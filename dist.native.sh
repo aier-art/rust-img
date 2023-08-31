@@ -27,11 +27,11 @@ source ./sh/cflag.sh
 cargo build $RUST_FEATURES --release --target $RUST_TARGET
 
 if [[ $(uname -s) == Linux ]]; then
-  mkdir -p /mnt/bin
+  sudo mkdir -p /opt/bin
 
   name=$(grep "^name" Cargo.toml | sed 's/name = //g' | awk -F\" '{print $2}')
 
-  pre=/mnt/bin/$name
+  pre=/opt/bin/$name
 
   if [ -f "$pre" ]; then
     rm -rf /tmp/$name
@@ -46,8 +46,8 @@ if [[ $(uname -s) == Linux ]]; then
     journalctl -u $name -n 10 --no-pager --no-hostname
     echo -e "\n\n ❗服务启动失败\n\n"
     rm -rf /tmp/$name.failed
-    mv /mnt/bin/$name /tmp/$name.failed
-    mv /tmp/$name /mnt/bin/$name
+    mv /opt/bin/$name /tmp/$name.failed
+    mv /tmp/$name /opt/bin/$name
     systemctl restart $name && sleep 5 || true
   fi
 
