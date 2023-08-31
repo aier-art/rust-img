@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-exec sudo exec journalctl -f -xeu img
+exec sudo journalctl -f -xeu img
