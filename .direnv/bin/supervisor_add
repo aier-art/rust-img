@@ -7,7 +7,8 @@ DIR=`pwd`
 
 exe=$1
 
-ini=xxai-$exe.ini
+name=xxai-$exe
+ini=$name.ini
 
 fp=/etc/supervisor/conf.d/$ini
 
@@ -22,7 +23,7 @@ sd -s "\$EXE" "bash -c \"export HOME=$HOME && cd $DIR && export PATH=\$PATH:$(di
 cd /etc
 
 sudo supervisorctl update
-sudo supervisorctl restart $exe
+sudo supervisorctl restart $name
 sleep 3
 sudo supervisorctl status
 
