@@ -26,19 +26,20 @@ source ./sh/cflag.sh
 
 cargo build $RUST_FEATURES --release --target $RUST_TARGET
 
-if [[ $(uname -s) == Linux ]]; then
-  sudo mkdir -p /opt/bin
+name=$(grep "^name" Cargo.toml | sed 's/name = //g' | awk -F\" '{print $2}')
 
-  name=$(grep "^name" Cargo.toml | sed 's/name = //g' | awk -F\" '{print $2}')
+pre=/opt/bin/$name
 
-  pre=/opt/bin/$name
+if [ -f "$pre" ]; then
+  rm -rf /tmp/$name
+  sudo mv $pre /tmp
+fi
 
-  if [ -f "$pre" ]; then
-    rm -rf /tmp/$name
-    mv $pre /tmp
-  fi
+sudo mkdir -p /opt/bin
+sudo mv target/$RUST_TARGET/release/$name /opt/bin
 
-  mv target/$RUST_TARGET/release/$name /mnt/bin
+case $(uname -s) in
+Linux*)
   systemctl restart $name || ./service.sh
   sleep 5
 
@@ -53,4 +54,8 @@ if [[ $(uname -s) == Linux ]]; then
 
   systemctl status $name --no-pager
   journalctl -u $name -n 10 --no-pager --no-hostname
-fi
+  ;;
+*)
+  ./supervisor.sh
+  ;;
+esac

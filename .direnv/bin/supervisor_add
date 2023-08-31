@@ -4,7 +4,6 @@ set -ex
 
 DIR=`pwd`
 
-bunx cep -c src -o lib
 
 exe=$1
 
@@ -16,15 +15,14 @@ sudo cp $DIR/supervisor/$ini $fp
 
 rtx="$(which rtx) env"
 
-if [ -x "$(command -v brew)" ]; then
-  BIN=$(dirname $(which brew))
-fi
 
 
-sd -s "\$EXE" "bash -c \"export HOME=$HOME && cd $DIR && export PATH=\$PATH:$BIN:$(dirname $(which realpath)) && [[ -f /etc/profile ]] && source /etc/profile; exec $(which timeout) 1d $(which direnv) exec . $DIR/$exe.sh\"" $fp
+sd -s "\$EXE" "bash -c \"export HOME=$HOME && cd $DIR && export PATH=\$PATH:$(dirname $(which realpath)) && [[ -f /etc/profile ]] && source /etc/profile; exec $(which timeout) 1d $(which direnv) exec . $DIR/$exe.sh\"" $fp
 
 cd /etc
 
 sudo supervisorctl update
+sudo supervisorctl restart $exe
 sleep 3
 sudo supervisorctl status
+
