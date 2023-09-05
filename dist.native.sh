@@ -40,20 +40,20 @@ sudo mv target/$RUST_TARGET/release/$name /opt/bin
 
 case $(uname -s) in
 Linux*)
-  systemctl restart $name || ./service.sh
+  sudo systemctl restart $name || sudo ./service.sh
   sleep 5
 
-  if ! systemctl is-active --quiet img.service; then
-    journalctl -u $name -n 10 --no-pager --no-hostname
+  if ! sudo systemctl is-active --quiet img.service; then
+    sudo journalctl -u $name -n 10 --no-pager --no-hostname
     echo -e "\n\n ❗服务启动失败\n\n"
-    rm -rf /tmp/$name.failed
-    mv /opt/bin/$name /tmp/$name.failed
-    mv /tmp/$name /opt/bin/$name
-    systemctl restart $name && sleep 5 || true
+    sudo rm -rf /tmp/$name.failed
+    sudo mv /opt/bin/$name /tmp/$name.failed
+    sudo mv /tmp/$name /opt/bin/$name
+    sudo systemctl restart $name && sleep 5 || true
   fi
 
-  systemctl status $name --no-pager
-  journalctl -u $name -n 10 --no-pager --no-hostname
+  sudo systemctl status $name --no-pager
+  sudo journalctl -u $name -n 10 --no-pager --no-hostname
   ;;
 *)
   ./supervisor.sh
