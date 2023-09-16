@@ -5,10 +5,16 @@ set -ex
 
 os_type=$(uname)
 
-source $DIR/sh/cflag.sh
-if ! [ -x "$(command -v g++)" ]; then
-  apt-get install -y g++
-fi
+ensure() {
+  for pkg in "$@"; do
+    if ! command -v $pkg &>/dev/null; then
+      apt-get install -y $pkg
+    fi
+  done
+}
+
+ensure g++ cmake
+
 # VER=0.8.2
 #
 # if [ ! -d "jpegxl-rs" ]; then
