@@ -5,15 +5,23 @@ set -ex
 
 os_type=$(uname)
 
-ensure() {
-  for pkg in "$@"; do
-    if ! command -v $pkg &>/dev/null; then
-      apt-get install -y $pkg
-    fi
-  done
-}
+case $(uname -s) in
+Linux*)
+  ensure() {
+    for pkg in "$@"; do
+      if ! command -v $pkg &>/dev/null; then
+        apt-get install -y $pkg
+      fi
+    done
+  }
 
-ensure g++ cmake pkg-config
+  ensure g++ cmake pkg-config
+  apt-get install -y libssl-dev
+  ;;
+*)
+  ./supervisor.sh
+  ;;
+esac
 
 # VER=0.8.2
 #
