@@ -13,7 +13,7 @@ ensure() {
   done
 }
 
-ensure g++ cmake
+ensure g++ cmake pkg-config
 
 # VER=0.8.2
 #
